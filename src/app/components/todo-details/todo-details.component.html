@@ -1,0 +1,65 @@
+<div style="width: 400px; margin: auto;">
+  <div *ngIf="currentTodo" class="edit-form">
+    <h4>Туду</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Название ТуДу</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentTodo.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Описание ТуДу</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentTodo.description"
+          name="description"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentTodo.status ? "Выполнено" : "Не выполнено" }}
+      </div>
+    </form>
+
+    <button
+      class="badge badge-primary mr-2"
+      *ngIf="currentTodo.status"
+      (click)="updateStatus(false)"
+    >
+      Не выполнено
+    </button>
+    <button
+      *ngIf="!currentTodo.status"
+      class="badge badge-primary mr-2"
+      (click)="updateStatus(true)"
+    >
+      Выполнено
+    </button>
+
+    <button class="badge badge-danger mr-2" (click)="deleteTodo()">
+      Удалить ТуДу
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success"
+      (click)="updateTodo()"
+    >
+      Обновить ТуДу
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentTodo">
+    <br />
+    <p>Нету доступа к этому ТуДу</p>
+  </div>
+</div>

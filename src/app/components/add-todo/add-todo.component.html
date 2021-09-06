@@ -1,0 +1,35 @@
+<div style="width: 400px; margin: auto;">
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Название ТуДу</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="todo.title"
+          name="title"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Описание ТуДу</label>
+        <input
+          class="form-control"
+          id="description"
+          required
+          [(ngModel)]="todo.description"
+          name="description"
+        />
+      </div>
+
+      <button (click)="saveTodo()" class="btn btn-success">Сохранить</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Успешно сохранено!</h4>
+      <button class="btn btn-success" (click)="newTodo()">Добавить</button>
+    </div>
+  </div>
+</div>

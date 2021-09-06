@@ -1,0 +1,63 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Поиск ТуДу по названию"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchTitle()"
+        >
+          Искать!
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>ТуДу лист</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let todo of todos; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveTodo(todo, i)"
+      >
+        {{ todo.title }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTodos()">
+      Удалить все ТуДу
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentTodo">
+      <h4>Выбранный ТуДу</h4>
+      <div>
+        <label><strong>Название:</strong></label> {{ currentTodo.title }}
+      </div>
+      <div>
+        <label><strong>Описание:</strong></label>
+        {{ currentTodo.description }}
+      </div>
+      <div>
+        <label><strong>Статус:</strong></label>
+        {{ currentTodo.status ? "Выполнено" : "Не выполнено" }}
+      </div>
+
+      <a class="badge badge-warning" routerLink="/todos/{{ currentTodo._id }}">
+        Изменить
+      </a>
+    </div>
+
+    <div *ngIf="!currentTodo">
+      <br />
+      <p>Выберете ТуДу для просмотра деталей...</p>
+    </div>
+  </div>
+</div>
